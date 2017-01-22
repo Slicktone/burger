@@ -2,9 +2,9 @@ var connection = require('../config/connection.js');
 
 var orm = {
     // input the table name to be selected from
-    selectAll: function(tableInput, callback) {
+    selectAll: function(callback) {
         // use connection.query to grab the data from server
-        var queryString = "SELECT * FROM " + tableInput + ";";
+        var queryString = "SELECT * FROM " + burgers + ";";
         connection.query(queryString, function(err, result) {
             if(err) {
                 throw err;
@@ -12,8 +12,8 @@ var orm = {
             callback(result);
         });
     },
-    insertOne: function(table, cols, vals, callback) {
-        var queryString = "INSERT INTO " + table; 
+    insertOne: function(burgers, cols, vals, callback) {
+        var queryString = "INSERT INTO " + burgers(burger_name, devoured); 
         queryString += " (";
         queryString += cols.toString();
         queryString += ") ";
@@ -27,8 +27,8 @@ var orm = {
             callback(result);
         });
     },
-    updateOne: function(table, objColVals, condition, callback) {
-        var queryString = "UPDATE " + table;
+    updateOne: function(devoured, condition, callback) {
+        var queryString = "UPDATE " + devoured;
 
         queryString += " SET ";
         queryString += objToSql(objColVals);
