@@ -1,28 +1,53 @@
 var connection = require('../config/connection.js');
 
-// create the methods that will execute the necessary MySQL commands in the controllers.
-// `selectAll()` 
-// `insertOne()` 
-// `updateOne()` 
-
-var burger = {
-    selectAll: function(callback) {
-        orm.selectAll('burger', function(response) {
-            callback(response);
+var orm = {
+    // input the table name to be selected from
+    selectAll: function(tableInput, callback) {
+        // use connection.query to grab the data from server
+        var queryString = "SELECT * FROM " + tableInput + ";";
+        connection.query(queryString, function(err, result) {
+            if(err) {
+                throw err;
+            }
+            callback(result);
         });
     },
+    insertOne: function(table, cols, vals, callback) {
+        var queryString = "INSERT INTO " + table; 
+        queryString += " (";
+        queryString += cols.toString();
+        queryString += ") ";
 
-    insertOne: function(cols, vals, callback) {
-        orm.insertOne('burger', cols, vals, function(response) {
-            callback(response);
+        console.log(queryString);
+        
+        connection.query(queryString, vals, function(err, result) {
+            if (err) {
+                throw err;
+            }
+            callback(result);
         });
     },
-    
-    updateOne: function(objColVals, condition, callback) {
-        orm.updateOne('burger', objColVals, condition, function(response) {
-            callback(response);
+    updateOne: function(table, objColVals, condition, callback) {
+        var queryString = "UPDATE " + table;
+
+        queryString += " SET ";
+        queryString += objToSql(objColVals);
+        queryString += " WHERE ";
+        queryString += condition;
+
+        console.log(queryString);
+        connection.query(queryString, function(err, result) {
+            if (err) {
+                throw err;
+            }
+            callback(result);
         });
     }
 };
+// create the methods that will execute the necessary MySQL commands in the controllers.
+// `selectAll()` 
+// `insertOne()` 
+// `updateOne()`
+// make a special delete method maybe? 
 
-module.exports = burger;
+module.exports = orm;
