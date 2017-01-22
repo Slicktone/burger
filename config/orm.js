@@ -2,7 +2,7 @@ var connection = require('../config/connection.js');
 
 var orm = {
     // input the table name to be selected from
-    selectAll: function(callback) {
+    selectAll: function(burgers, callback) {
         // use connection.query to grab the data from server
         var queryString = "SELECT * FROM " + burgers + ";";
         connection.query(queryString, function(err, result) {
