@@ -3,7 +3,7 @@ var bodyParser = require('body-parser');
 var methodOverride = require('method-override');
 var orm = require('./config/orm.js');
 
-var port = 3000;
+var port = process.env.PORT || 3000;
 
 var app = express();
 
@@ -25,5 +25,9 @@ app.set('view engine', 'handlebars');
 // Routes for server access
 var routes = require('./controllers/burgers_controller.js');
 app.use('/', routes);
+app.use('/update', routes);
+app.use('/create', routes);
 
-app.listen(port);
+app.listen(PORT, function() {
+    console.log('App listening on Port:%s', PORT);
+});
