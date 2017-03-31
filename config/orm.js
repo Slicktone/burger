@@ -53,7 +53,7 @@ var orm = {
 
 // objColVals is the columns and values that you want to update
   // an example{name: panther, sleepy: true}
-    updateOne: function(devoured, objColVals, condition, callback) {
+    update: function(devoured, objColVals, condition, callback) {
         var queryString = "UPDATE " + devoured;
 
         queryString += " SET ";
