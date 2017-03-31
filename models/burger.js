@@ -8,16 +8,19 @@ var burger = {
         });
     },
 
-    insertOne: function(cols, vals, callback) {
-        orm.insertOne('burgers', cols, vals, function(response) {
-            callback(response);
-        });
+    create: function(name, callback) {
+        orm.create('burgers', [
+            'burger_name', 'devoured'
+        ], [
+            name, false
+        ], callback);
     },
     
-    updateOne: function(objColVals, condition, callback) {
-        orm.updateOne('burgers', objColVals, condition, function(response) {
-            callback(response);
-        });
+    update: function(id, callback) {
+        var condition = "id=" + id;
+        orm.update("burgers", {
+            devoured: true
+        }, condition, callback);
     }
 };
 
