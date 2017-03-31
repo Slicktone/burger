@@ -1,5 +1,5 @@
 # Yummy Burger App!
-![Burger Time] (/public/assets/img/burger.png)
+
 A burger logger with MySQL, Node, Express, Handlebars and a homemade ORM
 Node and MySQL is used to query and route data in this app, Handlebars is used to generate HTML.
 
